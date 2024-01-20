@@ -67,6 +67,8 @@ const TaskItem = ({ task, onDeleteTask, onEditRow, onCompletedTask }: IProps) =>
                     }
                     <Grid item container md={12} justifyContent="space-between">
                         <Chip label={formattedDate} color="primary" variant="outlined" sx={{ mt: 3 }} />
+                        <Tooltip title={task.isCompleted ? 'Completed' : 'Incompleted'}>
+
                         <Checkbox
                             {...label}
                             icon={<CheckBoxOutlineBlankIcon />}
@@ -78,6 +80,7 @@ const TaskItem = ({ task, onDeleteTask, onEditRow, onCompletedTask }: IProps) =>
                             }
                             }
                         />
+                        </Tooltip>
                     </Grid>
 
                 </Card>
