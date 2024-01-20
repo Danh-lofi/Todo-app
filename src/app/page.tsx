@@ -121,6 +121,10 @@ export default function Home() {
 
   const changeTypeFilterHandle = (value: string)=>{
     const listFilter = filterTasksHandle(tasks, value);
+    if(listFilter.length === 0) {setIsEmpty(true);}
+    else if(isEmpty) {
+      setIsEmpty(false);
+    }
     setTasksFilter(listFilter);
     setTypeFilter(value);
   }
@@ -129,10 +133,12 @@ export default function Home() {
     const randomId = Math.random().toString(36).substring(2, 10);
     return randomId;
   }
+
   const addTaskHandle = (task: ITask) => {
     const newTask = [...tasks, task]
     setTasks(newTask)
   }
+
   const editTaskHandle = (task: ITask) => {
     setIsEdit(true);
     reset({ ...task })
