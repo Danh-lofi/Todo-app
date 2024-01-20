@@ -14,6 +14,7 @@ import Task from "./components/task/Task";
 import styles from "./page.module.css";
 import { ITask } from "./types/task";
 import img from './assets/empty-data.png';
+import SelectComponent from "./components/select/Select";
 
 
 const style = {
@@ -50,10 +51,15 @@ const TaskFormSchema = Yup.object().shape({
 
 export default function Home() {
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const [tasksFilter, setTasksFilter] = useState<ITask[]>([]);
   const [open, setOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
-
+  const [options, setOptions] = useState<{value: string, label: string}[]>([{
+    value: 'all',
+    label: 'Task 0'
+  }])
+  const [typeFilter, setTypeFilter] = useState(options[0].value);
   const defaultValues: ITask = {
     id: '0',
     title: "",
@@ -96,6 +102,27 @@ export default function Home() {
     addTaskHandle(data);
     handleClose();
     reset(defaultValues);
+  }
+
+  const updateOptionsHandle = (tasks: ITask[]) => {
+    return [
+    { value: 'all', label: `Task ${tasks.length}`},
+    { value: 'completed', label: `Task Completed ${tasks.filter(task=>task.isCompleted).length}` },
+    { value: 'uncompleted', label: `Task Uncompleted ${tasks.filter(task=>!task.isCompleted).length}` },
+  ]
+  }
+
+  const filterTasksHandle = (tasks: ITask[], type: string) => {
+    if(type === 'all') return tasks;
+    if(type === 'completed') return tasks.filter(task=>task.isCompleted);
+    if(type === 'uncompleted') return tasks.filter(task=>!task.isCompleted);
+    return tasks;
+  }
+
+  const changeTypeFilterHandle = (value: string)=>{
+    const listFilter = filterTasksHandle(tasks, value);
+    setTasksFilter(listFilter);
+    setTypeFilter(value);
   }
 
   const generateRandomId = () => {
@@ -150,6 +177,8 @@ export default function Home() {
     }
     saveLocalStorages(tasks)
     setIsEmpty(false);
+    setOptions(updateOptionsHandle(tasks));
+    setTasksFilter(tasks);
   }, [tasks]);
 
   useEffect(() => {
@@ -161,12 +190,13 @@ export default function Home() {
       setIsEmpty(true);
     }
   }, [])
+
   return (
     <Container sx={{ my: 5 }}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Typography variant="h2" className={styles.title} sx={{ textAlign: "center" }}>TO DO</Typography>
         <Grid item container md={12} mt={3} justifyContent="space-between">
-          <Typography variant="h6" className={styles.subtitle}>Tasks ({tasks.length})</Typography>
+          <SelectComponent title="Filter" options={options} value={typeFilter} handleChange={changeTypeFilterHandle} />
           <Button
             onClick={() => setOpen(true)}
             variant="outlined"
@@ -183,7 +213,7 @@ export default function Home() {
             <Typography variant="h6" className={styles.subtitle}>No tasks</Typography>
           </Box>
           :
-          <Task tasks={tasks} onDeleteTask={deleteTaskHandle} onEditRow={editTaskHandle} onCompletedTask={completeTaskHandle} />
+          <Task tasks={tasksFilter} onDeleteTask={deleteTaskHandle} onEditRow={editTaskHandle} onCompletedTask={completeTaskHandle} />
         }
 
         <Modal
