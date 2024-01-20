@@ -30,6 +30,14 @@ const style = {
   border: 'none',
 };
 
+ const styleButton = {
+    background: 'linear-gradient(90.21deg, rgba(170, 54, 124, 0.5) -5.91%, rgba(74, 47, 189, 0.5) 111.58%)',
+    border: '1px solid #fff',
+    color: '#fff',
+    borderRadius: 0,
+    padding: '10px 34px',
+  };
+
 const TaskFormSchema = Yup.object().shape({
   id: Yup.string(),
   title: Yup.string()
@@ -163,7 +171,7 @@ export default function Home() {
             onClick={() => setOpen(true)}
             variant="outlined"
             startIcon={<Iconify icon="eva:plus-fill" />}
-            className={styles.button}
+            style={styleButton}
           >
             New Task
           </Button>
