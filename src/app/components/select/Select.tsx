@@ -17,7 +17,7 @@ export default function SelectComponent({value, handleChange, options, title}: I
  
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl  sx={{ m: 1, minWidth: 120, width: ['100%', 'auto'], marginInline: [0,'unset'] }} size="small">
       <InputLabel sx={{color: '#fff'}} id="demo-select-small-label">{title}</InputLabel>
       <Select
         labelId="demo-select-small-label"

@@ -37,6 +37,7 @@ const style = {
     color: '#fff',
     borderRadius: 0,
     padding: '10px 34px',
+   
   };
 
 const TaskFormSchema = Yup.object().shape({
@@ -203,17 +204,28 @@ export default function Home() {
     <Container sx={{ my: 5 }}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Typography variant="h2" className={styles.title} sx={{ textAlign: "center" }}>TO DO</Typography>
-        <Grid item container md={12} mt={3} justifyContent="space-between">
+        <Grid item container xs={12} md={12} mt={3} justifyContent="space-between">
+          
           <SelectComponent title="Filter" options={options} value={typeFilter} handleChange={changeTypeFilterHandle} />
-          <Button
+         
+          
+            <Button
             onClick={() => setOpen(true)}
             variant="outlined"
             startIcon={<Iconify icon="eva:plus-fill" />}
+           
             style={styleButton}
+            sx={{
+              width: ['100%', 'auto'],
+              mt: [2, 0],
+            }}
           >
             New Task
           </Button>
-        </Grid>
+            </Grid>
+
+          
+       
         {isEmpty ?
           <Box sx={{ mt: 3, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <Image src={img.src} alt="empty-data" width={300}
