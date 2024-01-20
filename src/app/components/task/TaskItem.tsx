@@ -43,30 +43,28 @@ const TaskItem = ({ task, onDeleteTask, onEditRow, onCompletedTask }: IProps) =>
     return (
         <>
             <Grid item xs={12} sm={6} lg={4} >
-                <Card sx={{ p: 2, my: 1 }}>
+                <Card sx={{ p: 2, my: 1, borderRadius: "10px" }}>
                     <Grid item container md={12} justifyContent="space-between">
                         {
                             task.title.length > 20 ?
-                            <Tooltip title={task.title}>
-                                 <Typography variant="h6">{task.title.slice(0, 20)}...</Typography>
-
-                            </Tooltip>
+                                <Tooltip title={task.title}>
+                                    <Typography variant="h5">{task.title.slice(0, 20)}...</Typography>
+                                </Tooltip>
                                 :
-                            <Typography variant="h6">{task.title}</Typography>
+                                <Typography variant="h5">{task.title}</Typography>
                         }
                         <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
                             <Iconify icon="eva:more-vertical-fill" />
                         </IconButton>
                     </Grid>
                     {
-                            task.description.length > 40 ?
+                        task.description.length > 80 ?
                             <Tooltip title={task.description}>
-                                 <Typography minHeight={60} mr={4} variant="body1" sx={{lineBreak: "anywhere"}}>{task.description.slice(0, 40)}...</Typography>
-
+                                <Typography fontSize={14} minHeight={60} mr={4} variant="body1" sx={{ lineBreak: "anywhere",opacity: .7 }}>{task.description.slice(0, 40)}...</Typography>
                             </Tooltip>
-                                :
-                            <Typography minHeight={60} mr={4} variant="body1">{task.description}</Typography>
-                        }
+                            :
+                            <Typography fontSize={14} minHeight={60} mr={4} variant="body1" sx={{opacity: .7}}>{task.description}</Typography>
+                    }
                     <Grid item container md={12} justifyContent="space-between">
                         <Chip label={formattedDate} color="primary" variant="outlined" sx={{ mt: 3 }} />
                         <Checkbox

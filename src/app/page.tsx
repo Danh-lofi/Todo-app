@@ -156,13 +156,14 @@ export default function Home() {
   return (
     <Container sx={{ my: 5 }}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Typography variant="h2" className={styles.title} sx={{ textAlign: "center" }}>To do</Typography>
+        <Typography variant="h2" className={styles.title} sx={{ textAlign: "center" }}>TO DO</Typography>
         <Grid item container md={12} mt={3} justifyContent="space-between">
           <Typography variant="h6" className={styles.subtitle}>Tasks ({tasks.length})</Typography>
           <Button
             onClick={() => setOpen(true)}
-            variant="contained"
+            variant="outlined"
             startIcon={<Iconify icon="eva:plus-fill" />}
+            className={styles.button}
           >
             New Task
           </Button>
@@ -190,10 +191,10 @@ export default function Home() {
               <CreateTask />
               <Stack alignItems="flex-end">
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 3 }}>
-                  <Button type="button" variant="outlined" onClick={handleClose}>
+                  <Button size="small" type="button" variant="outlined" onClick={handleClose}>
                     Back
                   </Button>
-                  <Button type="submit" variant="contained">
+                  <Button size="small" type="submit" variant="contained" >
                     {isEdit ? 'Edit' : 'Save'}
                   </Button>
                 </Box>

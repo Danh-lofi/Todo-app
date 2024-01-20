@@ -228,3 +228,22 @@
     transform: rotate(0deg);
   }
 }
+
+
+/* .title{
+      -webkit-text-fill-color: transparent;
+        background: linear-gradient(90.21deg, #ff2aaa -5.91%, #6b54cc 111.58%);
+        -webkit-background-clip: text;
+        background-clip: text;
+} */
+
+.button{
+  background: linear-gradient(90.21deg, rgba(170, 54, 124, .5) -5.91%, rgba(74, 47, 189, .5) 111.58%);
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 0;
+  padding: 10px 34px;
+}
+.button:hover{
+    border: 1px solid #fff;
+}
