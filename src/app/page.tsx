@@ -173,6 +173,8 @@ export default function Home() {
   useEffect(() => {
     if (tasks.length === 0) {
       setIsEmpty(true);
+      setTasksFilter(tasks);
+      setOptions(updateOptionsHandle(tasks));
       return;
     }
     saveLocalStorages(tasks)
